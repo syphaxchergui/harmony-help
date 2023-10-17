@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import { useAuth } from "../context/AuthContext";
 import Login from "./Login";
 import Register from "./Register";
+import NewMission from "./NewMission";
 
 export function MyRoutes() {
   const { loggedin, loading } = useAuth();
@@ -25,6 +26,7 @@ export function MyRoutes() {
     <Routes>
       <Route exact path='/' element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path='/new-mission' element={<NewMission />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     </Routes>

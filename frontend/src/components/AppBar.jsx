@@ -14,9 +14,25 @@ const AppBar = () => {
           />
         </Link>
       </div>
-      <Link to='/profile'>
-        <p className='font-medium text-xl hover:bg-slate-300 px-6 py-2 rounded-full mr-2 bg-slate-200'>Your Profile</p>
-      </Link>
+      <div className="flex items-center justify-end">
+        <Link to='/benevoles'>
+          <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>
+            Benevoles
+          </p>
+        </Link>
+
+        <Link to='/profile'>
+          <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>
+            Your Profile
+          </p>
+        </Link>
+
+        <Link to='/new-mission'>
+          <p className='font-medium hover:bg-blue-400 px-6 py-2 rounded mr-2 bg-blue-300'>
+            New Mission
+          </p>
+        </Link>
+      </div>
     </div>
   );
 };
