@@ -33,6 +33,8 @@ const DetailsMission = () => {
       <div className="p-4">
         <p className="text-sm text-gray-500">
           {mission.createdAt} by {mission?.author?.username}
+
+          {JSON.stringify(mission)}
         </p>
         <h3 className="font-medium text-xl mb-2 flex-wrap">{mission.title}</h3>
         <div className="flex flex-col items-start mt-6 gap-3">
