@@ -1,15 +1,23 @@
-import { apiService } from './api.service';
+import { users } from '../utils/users';
 
 export const login = ({ username, password }) => {
-	return apiService.post('/auth/login', {
-		username,
-		password,
+	return new Promise((resolve, reject) => {
+		const user = users.find(user => user.username === username && user.password === password);
+		console.log(JSON.stringify(user));
+		if (user) {
+			localStorage.setItem('_connectedUser', JSON.stringify(user));
+			resolve({ success: true, user });
+		} else {
+			reject({ success: false, message: 'Invalid credentials' });
+		}
 	});
 };
 
 export const register = ({ username, password }) => {
-	return apiService.post('/auth/register', {
-		username,
-		password,
+	return new Promise((resolve, reject) => {
+		const user = { id: Math.random().toString(36).substr(2, 9), username, password, score: 0 };
+		users.push(user);
+		localStorage.setItem('_connectedUser', JSON.stringify(user));
+		resolve({ success: true });
 	});
 };

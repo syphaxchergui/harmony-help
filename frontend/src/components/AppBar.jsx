@@ -15,11 +15,11 @@ const AppBar = () => {
         </Link>
       </div>
       <div className="flex items-center justify-end">
-        <Link to='/benevoles'>
+        {/* <Link to='/benevoles'>
           <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>
             Benevoles
           </p>
-        </Link>
+        </Link> */}
 
         <Link to='/profile'>
           <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>

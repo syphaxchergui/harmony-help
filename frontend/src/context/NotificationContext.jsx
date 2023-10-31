@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 const NotificationContext = React.createContext();
 
@@ -13,7 +15,7 @@ export default function NotificationProvider({ children }) {
 		setState({ open: true, body });
 	};
 	const error = (body) => {
-		setState({ open: true, body });
+		setState({ open: true, body, severity: 'error' });
 	};
 	const info = (body) => {
 		setState({ open: true, body });
@@ -35,7 +37,21 @@ export default function NotificationProvider({ children }) {
 			}}
 		>
 			{children}
-
+			<Snackbar
+				open={state.open}
+				autoHideDuration={6000}
+				onClose={handleClose}
+				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+			>
+				<MuiAlert
+					elevation={6}
+					variant="filled"
+					onClose={handleClose}
+					severity={state.severity || 'success'}
+				>
+					{state.body}
+				</MuiAlert>
+			</Snackbar>
 		</NotificationContext.Provider>
 	);
 }

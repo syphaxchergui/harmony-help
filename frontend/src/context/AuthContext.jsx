@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-import useToken from '../hooks/useToken';
 import { login, register } from '../services/auth.service';
 import { useNotifications } from './NotificationContext';
 
@@ -19,20 +18,19 @@ const AuthContext = React.createContext(initialState);
 
 export const AuthProvider = ({ children }) => {
 	const [state, setState] = useState(initialState);
-	const [storedToken, storeToken] = useToken('_token');
 	const { actions: notify } = useNotifications();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!state.loggedin) storeToken({ user: undefined, token: undefined });
-		else storeToken({ user: state.user, token: state.token });
+		if (!state.loggedin) localStorage.removeItem('_connectedUser');
+		else localStorage.setItem('_connectedUser', JSON.stringify(state.user));
 		setState({ ...state, loading: false });
 	}, [state.loggedin]);
 
 	useLayoutEffect(() => {
-		if (storedToken?.user == undefined && storedToken?.token == undefined)
-			setState({ ...state, loggedin: false, error: '' });
-		else setState({ ...storedToken, loggedin: true, error: '' });
+		const storedUser = JSON.parse(localStorage.getItem('_connectedUser'));
+		if (storedUser == null) setState({ ...state, loggedin: false, error: '' });
+		else setState({ ...state, user: storedUser, token: storedUser, loggedin: true, error: '' });
 	}, []);
 
 	// Actions
@@ -47,26 +45,29 @@ export const AuthProvider = ({ children }) => {
 				password,
 			});
 
-			if (result.data.success) {
+			console.log(result)
+
+			if (result.success) {
 				setState({
 					...state,
-					user: result.data.user,
-					token: result.data.token,
+					user: result.user,
+					token: result.user,
 					loading: false,
 					loggedin: true,
 					error: '',
 				});
 				navigate('/');
 			} else {
-				notify?.error(result.data.message);
+				notify?.error(result.message);
 				setState({
 					...state,
 					loading: false,
 					loggedin: false,
-					error: result.data.message,
+					error: result.message,
 				});
 			}
 		} catch (err) {
+			console.log(err)
 			setState({
 				...state,
 				loading: false,
@@ -88,23 +89,23 @@ export const AuthProvider = ({ children }) => {
 				password,
 			});
 
-			if (result.data.success) {
+			if (result.success) {
 				setState({
 					...state,
-					user: result.data.user,
-					token: result.data.token,
+					user: result.user,
+					token: result.user,
 					loading: false,
 					loggedin: true,
 					error: '',
 				});
 				navigate('/');
 			} else {
-				notify?.error(result.data.message);
+				notify?.error(result.message);
 				setState({
 					...state,
 					loading: false,
 					loggedin: false,
-					error: result.data.message,
+					error: result.message,
 				});
 			}
 		} catch (err) {
@@ -119,6 +120,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const logout = async () => {
+		localStorage.removeItem('_connectedUser');
 		setState(initialState);
 	};
 

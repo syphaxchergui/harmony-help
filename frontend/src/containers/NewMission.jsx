@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { rewardsService } from "../services/reward.service";
+import useToken from "../hooks/useToken";
 import {
-  TERipple,
-  TEModal,
-  TEModalDialog,
-  TEModalContent,
-  TEModalHeader,
-  TEModalBody,
-  TEModalFooter,
-} from "tw-elements-react";
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const initialData = {
   title: "",
@@ -18,6 +20,7 @@ const initialData = {
   duration: null,
   startDate: new Date(),
   reward: null,
+  otherReward:null
 };
 
 const competencies = [
@@ -58,6 +61,19 @@ const NewMission = () => {
   const [data, setData] = useState(initialData);
   const [showModal, setShowModal] = useState(false);
   const [rewardPoints, setRewardPoints] = useState(0);
+  const [storedMissions, storeMissions] = useToken("_missions");
+  const [connectedUser, storeConnectedUser] = useToken("_connectedUser");
+  const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,49 +86,75 @@ const NewMission = () => {
       data.competency * 1
     );
     setRewardPoints(rewardPoints);
-    setShowModal(true);
+    handleOpen();
+  };
+
+  const handlePublish = () => {
+    const newMission = {
+      ...data,
+      author: connectedUser,
+    };
+    if(!storedMissions) { 
+      storeMissions([newMission]);
+      handleClose();
+      navigate('/')
+      return;
+    }
+
+    storeMissions([...storedMissions, newMission]);
+    handleClose();
+    navigate('/')
   };
 
   return (
     <>
-      <div className='container mx-auto p-4'>
-        <h1 className='text-xl font-bold mb-2 '>Create a mission</h1>
-        <div className='max-w-3xl'>
-          <p className='mt-2'>Mission Title</p>
+      <div className="container mx-auto p-4">
+        <h1 className="text-xl font-bold mb-2 ">Create a mission</h1>
+        <div className="max-w-3xl">
+          <p className="mt-2">Mission Title</p>
           <input
-            placeholder='Mission Title'
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, title: e.target.value })}
-            type='text'
+            placeholder="Mission Title"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, title: e.target.value })
+            }
+            type="text"
             value={data.title}
-            autoComplete='false'
+            autoComplete="false"
           />
 
-          <p className='mt-2'>Mission Description</p>
+          <p className="mt-2">Mission Description</p>
           <textarea
-            placeholder='Mission Description'
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, description: e.target.value })}
+            placeholder="Mission Description"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, description: e.target.value })
+            }
             value={data.description}
-            autoComplete='false'
+            autoComplete="false"
           />
 
-          <p className='mt-2'>Mission Duration (hours)</p>
+          <p className="mt-2">Mission Duration (hours)</p>
           <input
-            placeholder='Mission Duration'
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, duration: e.target.value })}
-            type='number'
+            placeholder="Mission Duration"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, duration: e.target.value })
+            }
+            type="number"
             value={data.duration}
-            autoComplete='false'
+            autoComplete="false"
           />
 
-          <p className='mt-2'>Required Competency</p>
+          <p className="mt-2">Required Competency</p>
           <select
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, competency: e.target.value })}
-            value={data.competency}>
-            <option value='' disabled>
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, competency: e.target.value })
+            }
+            value={data.competency}
+          >
+            <option value="" disabled>
               Select a competency
             </option>
             {competencies.map((comp) => (
@@ -120,12 +162,15 @@ const NewMission = () => {
             ))}
           </select>
 
-          <p className='mt-2'>Difficulty</p>
+          <p className="mt-2">Difficulty</p>
           <select
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, difficulty: e.target.value })}
-            value={data.difficulty}>
-            <option value='' disabled>
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, difficulty: e.target.value })
+            }
+            value={data.difficulty}
+          >
+            <option value="" disabled>
               Select a difficulty
             </option>
             {difficulies.map((diff) => (
@@ -133,51 +178,59 @@ const NewMission = () => {
             ))}
           </select>
 
-          <p className='mt-2'>Start Date</p>
+          <p className="mt-2">Start Date</p>
           <input
-            type='date'
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, startDate: e.target.value })}
+            type="date"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            onChange={(e) =>
+              setData({ ...data, startDate: e.target.value })
+            }
             value={data.startDate}
           />
 
           <button
             onClick={handleSubmit}
-            className='mt-6 font-medium hover:bg-blue-400 px-6 py-2 rounded mr-2 bg-blue-300'>
+            className="mt-6 font-medium hover:bg-blue-400 px-6 py-2 rounded mr-2 bg-blue-300"
+          >
             Create Mission
           </button>
         </div>
       </div>
 
-      {showModal && (
-        <div className="max-w-lg p-4 rounded bg-white">
-          <h5 className='text-xl font-medium leading-normal text-neutral-80'>
-            You mission's reward points
-          </h5>
-         
-          <h3 className={"text-xl font-bold"}>🏆 {rewardPoints}</h3>
-          <p className='mt-2'>Add a reward (a chair, a service...)</p>
-          <input
-            placeholder='Reward'
-            className='w-full px-3 py-2 border border-gray-300 rounded'
-            onChange={(e) => setData({ ...data, reward: e.target.value })}
-            type='text'
-            value={data.reward}
-            autoComplete='false'
-          />
-          <button
-            type='button'
-            className='inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200'
-            onClick={() => setShowModal(false)}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"You mission's reward points"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <h3 className={"text-xl font-bold"}>🏆 {rewardPoints}</h3>
+            <p className="mt-2">Add a reward (a chair, a service...)</p>
+            <TextField
+              placeholder="Reward"
+              className="w-full px-3 py-2 border border-gray-300 rounded"
+              onChange={(e) =>
+                setData({ ...data, otherReward: e.target.value })
+              }
+              type="text"
+              value={data.otherReward}
+              autoComplete="false"
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
             Close
-          </button>
-          <button
-            type='button'
-            className='ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase mx-4'>
+          </Button>
+          <Button onClick={handlePublish} color="primary" autoFocus>
             Publish Mission
-          </button>
-        </div>
-      )}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
