@@ -86,6 +86,7 @@ const NewMission = () => {
       data.competency * 1
     );
     setRewardPoints(rewardPoints);
+    setData({...data, reward: rewardPoints})
     handleOpen();
   };
 
@@ -93,6 +94,7 @@ const NewMission = () => {
     const newMission = {
       ...data,
       author: connectedUser,
+      id: Math.random().toString(36).substr(2, 9) + Date.now(),
     };
     if(!storedMissions) { 
       storeMissions([newMission]);

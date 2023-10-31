@@ -1,9 +1,8 @@
 import { users } from '../utils/users';
 
-export const login = ({ username, password }) => {
+export const login = ({ username, password, isVolunteer }) => {
 	return new Promise((resolve, reject) => {
-		const user = users.find(user => user.username === username && user.password === password);
-		console.log(JSON.stringify(user));
+		const user = users.find(user => user.username === username && user.password === password && user.role === (isVolunteer ? 'benevole' : 'user'));
 		if (user) {
 			localStorage.setItem('_connectedUser', JSON.stringify(user));
 			resolve({ success: true, user });

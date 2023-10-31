@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 	}, []);
 
 	// Actions
-	const loginWithUsernameAndPassword = async ({ username, password }) => {
+	const loginWithUsernameAndPassword = async ({ username, password, isVolunteer }) => {
 		setState({
 			...state,
 			loading: true,
@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }) => {
 			const result = await login({
 				username,
 				password,
+				isVolunteer
 			});
 
 			console.log(result)
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	const registerWithUsernameAndPassword = async ({ username, password }) => {
+	const registerWithUsernameAndPassword = async ({ username, password, is }) => {
 		setState({
 			...state,
 			loading: true,

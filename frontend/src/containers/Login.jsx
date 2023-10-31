@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, FormControlLabel, Switch } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo-text.png";
 
 const Login = () => {
-  const [login, setLogin] = useState({ username: "", password: "" });
+  const [login, setLogin] = useState({ username: "", password: "", isVolunteer: false });
   const { actions } = useAuth();
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(login);
-    actions.loginWithUsernameAndPassword({username: login.username, password: login.password});
+    actions.loginWithUsernameAndPassword({username: login.username, password: login.password, isVolunteer: login.isVolunteer});
   };
 
   const handleInputChange = (e) => {
@@ -18,6 +18,14 @@ const Login = () => {
     setLogin((prevState) => ({
       ...prevState,
       [id]: value,
+    }));
+  };
+
+  const handleToggleChange = (e) => {
+    const { checked } = e.target;
+    setLogin((prevState) => ({
+      ...prevState,
+      isVolunteer: checked,
     }));
   };
 
@@ -44,6 +52,10 @@ const Login = () => {
           variant="outlined"
           value={login.password}
           onChange={handleInputChange}
+        />
+        <FormControlLabel
+          control={<Switch checked={login.isVolunteer} onChange={handleToggleChange} />}
+          label="Je suis bénévole"
         />
         <Button type="submit" variant="contained" color="primary">
           Login
