@@ -2,9 +2,13 @@ import React from "react";
 import logo from "../assets/logo-text-0.png";
 import { Link } from "react-router-dom";
 import useToken from "../hooks/useToken";
+import { useAuth } from "../context/AuthContext";
+import { Button, IconButton } from "@mui/material";
+import { AccountCircle, LogoutOutlined } from "@mui/icons-material";
 
 const AppBar = () => {
   const [connectedUser, storeConnectedUser] = useToken("_connectedUser");
+  const { actions } = useAuth();
 
   return (
     <div className="flex m-auto items-center justify-between w-full px-2 py-4 container">
@@ -15,27 +19,39 @@ const AppBar = () => {
             className="h-16 object-contain"
             alt="harmony-help-logo"
           />
-         {connectedUser?.role === 'benevole' && <p>Benevole</p>} 
         </Link>
       </div>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end gap-2">
         {/* <Link to='/benevoles'>
           <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>
             Benevoles
           </p>
         </Link> */}
 
-        <Link to="/profile">
-          <p className="font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex">
-            Your Profile
-          </p>
-        </Link>
-
         {connectedUser?.role === "user" && (
           <Link to="/new-mission">
-            <p className="font-medium hover:bg-blue-400 px-6 py-2 rounded mr-2 bg-blue-300">
+            <Button variant="contained" disableElevation>
               New Mission
-            </p>
+            </Button>
+          </Link>
+        )}
+
+        {connectedUser?.role === "user" ? (
+          <IconButton
+            onClick={() => actions.logout()}
+            edge="end"
+            aria-label="profile"
+            sx={{
+              borderRadius: "10px",
+            }}
+          >
+            <LogoutOutlined fontSize="24" />
+          </IconButton>
+        ) : (
+          <Link to="/profile">
+            <Button variant="outlined" disableElevation>
+              My profile
+            </Button>
           </Link>
         )}
       </div>

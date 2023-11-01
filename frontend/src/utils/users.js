@@ -9,8 +9,8 @@ export const users = [
   {
     id: "k9l0m1n2",
     role: "benevole",
-    username: "pierre",
-    password: "123456",
+    username: "benevole",
+    password: "motdepasse",
     score: Math.floor(Math.random() * (556 - 10 + 1) + 10),
   },
 ];
