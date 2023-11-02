@@ -11,10 +11,11 @@ const AllMissions = () => {
     : storedMissions;
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {missions?.length > 0 ? (
         missions.map((mission) => (
           <Mission
+            key={mission?.id}
             id={mission?.id}
             title={mission?.title}
             createdAt={mission?.startDate}
@@ -26,6 +27,8 @@ const AllMissions = () => {
             difficulty={mission?.difficulty}
             reward={mission?.reward}
             duration={mission?.duration}
+            offers={mission?.offers?.length}
+            adresse={mission?.adresse}
           />
         ))
       ) : (

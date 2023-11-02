@@ -4,13 +4,21 @@ export const users = [
     role: "user",
     username: "user",
     password: "motdepasse",
-    score: Math.floor(Math.random() * (556 - 10 + 1) + 10),
   },
   {
     id: "k9l0m1n2",
     role: "benevole",
     username: "benevole",
     password: "motdepasse",
-    score: Math.floor(Math.random() * (556 - 10 + 1) + 10),
+    note: 3.4,
+    score: 560,
+  },
+  {
+    id: "98h7m1m2",
+    role: "benevole",
+    username: "benevole_2",
+    password: "motdepasse",
+    note: 4.3,
+    score: 502,
   },
 ];

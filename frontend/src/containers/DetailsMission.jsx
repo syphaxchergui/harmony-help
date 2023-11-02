@@ -42,7 +42,11 @@ const DetailsMission = () => {
         <p className="text-sm text-gray-500  mb-4">
           {mission.startDate} by {mission?.author?.username}
         </p>
-        <div className="flex flex-col items-start mt-6 gap-3">
+        <p className="mr-2">Description:</p>
+        <p className="text-md font-mono mb-2">
+          {mission.description}
+        </p>
+        <div className="flex flex-col items-start mt-6 gap-2 ">
           <div className="flex items-center">
             <p className="mr-2">Difficulty:</p>
             <div
@@ -78,7 +82,7 @@ const DetailsMission = () => {
           {mission?.otherReward && (
             <div className="flex items-center">
               <p className="mr-2">Other rewards:</p>
-              <div className="rounded-full bg-green-100 text-green-400 font-medium px-3 py-1">
+              <div className=" font-medium px-3 py-1">
                 {mission?.otherReward}
               </div>
             </div>
@@ -97,9 +101,11 @@ const DetailsMission = () => {
               Send Offer
             </Button>
           </div>
-        ) : (
-          <div className="mt-6 font-medium px-4 py-2 rounded text-center bg-blue-50">Offer already sent !</div>
-        )}
+        ) : connectedUser?.role === "benevole" ? (
+          <div className="mt-6 font-medium px-4 py-2 rounded text-center bg-blue-50">
+            Offer already sent !
+          </div>
+        ) : null}
       </div>
 
       {connectedUser?.role === "user" && (
@@ -113,10 +119,10 @@ const DetailsMission = () => {
                     className="flex items-center bg-blue-50 rounded p-2 flex-col justify-between gap-2 w-full"
                     key={offer.user}
                   >
-                    <div className="flex flex-col justify-center items-start">
+                    <div className="flex flex-col justify-center items-start px-4 pt-1 w-full">
                       <span className="flex gap-1">
                         <p className="font-medium ">Benevole:</p>{" "}
-                        <p>{offer.user.username}</p>
+                        <p>{offer.user.username} - {offer.user.note}⭐</p>
                       </span>
                       <span className="flex gap-1">
                         <p className="font-medium">Status:</p>

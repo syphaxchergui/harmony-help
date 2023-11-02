@@ -21,6 +21,7 @@ const initialData = {
   startDate: new Date().toISOString().substr(0, 10),
   reward: 0,
   otherReward: "",
+  adresse: "", // new field
   offers: []
 };
 
@@ -87,7 +88,8 @@ const NewMission = () => {
       !data.description ||
       !data.duration ||
       !data.competency ||
-      !data.difficulty
+      !data.difficulty ||
+      !data.adresse 
     ) {
       alert("Please fill in all required fields.");
       return;
@@ -190,6 +192,25 @@ const NewMission = () => {
 
             <div className="mb-4">
               <label
+                htmlFor="adresse" 
+                className="block text-gray-700 font-bold mb-2"
+              >
+                Adresse <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="adresse"
+                name="adresse"
+                placeholder="Adresse"
+                className="w-full px-3 py-2 border border-gray-300 rounded"
+                onChange={(e) => setData({ ...data, adresse: e.target.value })} // new field
+                type="text"
+                value={data.adresse}
+                autoComplete="false"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
                 htmlFor="competency"
                 className="block text-gray-700 font-bold mb-2"
               >
@@ -263,7 +284,7 @@ const NewMission = () => {
                 }
                 value={data.startDate}
               />
-            </div>
+            </div>       
 
             <Button
               variant="contained"
