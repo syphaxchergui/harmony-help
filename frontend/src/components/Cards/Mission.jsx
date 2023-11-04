@@ -41,7 +41,7 @@ const Mission = ({
               {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
             </p>
             <p className="rounded-full px-4 bg-blue-50 text-blue-300 font-medium">
-              🕐 {duration}
+              🕐 {duration}h
             </p>
             <p className="rounded-full px-4 bg-amber-50 text-amber-300 font-medium">
               🏆 {reward}
