@@ -19,14 +19,23 @@ const AppBar = () => {
             className="h-16 object-contain"
             alt="harmony-help-logo"
           />
+          {connectedUser?.role === "user" ? <h1>Espace demandeur de service</h1> : <h1>Esapce Benevole</h1>}
         </Link>
       </div>
       <div className="flex items-center justify-end gap-2">
-        {/* <Link to='/benevoles'>
-          <p className='font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex'>
-            Benevoles
+        <Link to="/events">
+          <p className="font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex">
+            Events
           </p>
-        </Link> */}
+        </Link>
+
+        {connectedUser?.role === "benevole" && (
+          <Link to="/formations">
+            <p className="font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex">
+              Formations
+            </p>
+          </Link>
+        )}
 
         {connectedUser?.role === "user" && (
           <Link to="/new-mission">
