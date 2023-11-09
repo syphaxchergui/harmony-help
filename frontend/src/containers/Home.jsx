@@ -18,13 +18,13 @@ const HomePage = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl sm:text-3xl font-bold mt-6 mb-8">
         {connectedUser?.role === "user"
-          ? "My missions"
-          : "Find your next mission"}
+          ? "Mes missions"
+          : "Trouvez votre prochaine mission"}
       </h1>
       {isLoading && connectedUser?.role === "benevole" ? (
         <div className="flex flex-col items-center justify-center h-[40vh]">
           <p className="text-3xl text-center mb-6 font-medium animate-pulse">
-            Wait while we scan your neighborhood for missions...
+            Veuillez patienter pendant que nous scannons votre quartier pour des missions...
           </p>
           <CircularProgress />
         </div>

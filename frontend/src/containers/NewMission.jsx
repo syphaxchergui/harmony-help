@@ -21,7 +21,7 @@ const initialData = {
   startDate: new Date().toISOString().substr(0, 10),
   reward: 0,
   otherReward: "",
-  adresse: "", // new field
+  adresse: "", // nouveau champ
   offers: []
 };
 
@@ -29,37 +29,37 @@ const competencies = [
   {
     id: 0,
     value: 10,
-    name: "Competency 01",
+    name: "Compétence 01",
   },
   {
     id: 1,
     value: 15,
-    name: "Competency 02",
+    name: "Compétence 02",
   },
   {
     id: 2,
     value: 23,
-    name: "Competency 03",
+    name: "Compétence 03",
   },
   {
     id: 3,
     value: 29,
-    name: "Competency 04",
+    name: "Compétence 04",
   },
 ];
 
 const difficulties = [
   {
     value: "easy",
-    name: "Easy",
+    name: "Facile",
   },
   {
     value: "medium",
-    name: "Medium",
+    name: "Moyen",
   },
   {
     value: "hard",
-    name: "Hard",
+    name: "Difficile",
   },
 ];
 
@@ -91,7 +91,7 @@ const NewMission = () => {
       !data.difficulty ||
       !data.adresse 
     ) {
-      alert("Please fill in all required fields.");
+      alert("Veuillez remplir tous les champs obligatoires.");
       return;
     }
 
@@ -129,7 +129,7 @@ const NewMission = () => {
   return (
     <>
       <div className="container mx-auto p-4">
-        <h1 className="text-xl font-bold mb-2 ">Create a mission</h1>
+        <h1 className="text-xl font-bold mb-2 ">Créer une mission</h1>
         <div className="max-w-3xl">
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -137,12 +137,12 @@ const NewMission = () => {
                 htmlFor="title"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Mission Title <span className="text-red-500">*</span>
+                Titre de la mission <span className="text-red-500">*</span>
               </label>
               <input
                 id="title"
                 name="title"
-                placeholder="Mission Title"
+                placeholder="Titre de la mission"
                 className="w-full px-3 py-2 border border-gray-300 rounded"
                 onChange={(e) => setData({ ...data, title: e.target.value })}
                 type="text"
@@ -156,12 +156,12 @@ const NewMission = () => {
                 htmlFor="description"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Mission Description <span className="text-red-500">*</span>
+                Description de la mission <span className="text-red-500">*</span>
               </label>
               <textarea
                 id="description"
                 name="description"
-                placeholder="Mission Description"
+                placeholder="Description de la mission"
                 className="w-full px-3 py-2 border border-gray-300 rounded"
                 onChange={(e) =>
                   setData({ ...data, description: e.target.value })
@@ -176,12 +176,12 @@ const NewMission = () => {
                 htmlFor="duration"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Mission Duration (hours) <span className="text-red-500">*</span>
+                Durée de la mission (heures) <span className="text-red-500">*</span>
               </label>
               <input
                 id="duration"
                 name="duration"
-                placeholder="Mission Duration"
+                placeholder="Durée de la mission"
                 className="w-full px-3 py-2 border border-gray-300 rounded"
                 onChange={(e) => setData({ ...data, duration: e.target.value })}
                 type="number"
@@ -202,7 +202,7 @@ const NewMission = () => {
                 name="adresse"
                 placeholder="Adresse"
                 className="w-full px-3 py-2 border border-gray-300 rounded"
-                onChange={(e) => setData({ ...data, adresse: e.target.value })} // new field
+                onChange={(e) => setData({ ...data, adresse: e.target.value })} // nouveau champ
                 type="text"
                 value={data.adresse}
                 autoComplete="false"
@@ -214,7 +214,7 @@ const NewMission = () => {
                 htmlFor="competency"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Required Competency <span className="text-red-500">*</span>
+                Compétence requise <span className="text-red-500">*</span>
               </label>
               <select
                 id="competency"
@@ -230,7 +230,7 @@ const NewMission = () => {
                 value={data.competency.id}
               >
                 <option value="" disabled>
-                  Select a competency
+                  Sélectionnez une compétence
                 </option>
                 {competencies.map((comp) => (
                   <option key={comp.id} value={comp.id}>
@@ -245,7 +245,7 @@ const NewMission = () => {
                 htmlFor="difficulty"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Difficulty <span className="text-red-500">*</span>
+                Difficulté <span className="text-red-500">*</span>
               </label>
               <select
                 id="difficulty"
@@ -257,7 +257,7 @@ const NewMission = () => {
                 value={data.difficulty}
               >
                 <option value="" disabled>
-                  Select a difficulty
+                  Sélectionnez une difficulté
                 </option>
                 {difficulties.map((diff) => (
                   <option key={diff.value} value={diff.value}>
@@ -272,7 +272,7 @@ const NewMission = () => {
                 htmlFor="startDate"
                 className="block text-gray-700 font-bold mb-2"
               >
-                Start Date
+                Date de début
               </label>
               <input
                 id="startDate"
@@ -292,7 +292,7 @@ const NewMission = () => {
               disableElevation
               className="mt-6 font-medium hover:bg-blue-400 px-6 py-2 rounded mr-2 bg-blue-300"
             >
-              Create Mission
+              Créer la mission
             </Button>
           </form>
         </div>
@@ -305,14 +305,14 @@ const NewMission = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"You mission's reward points"}
+          {"Points de récompense de votre mission"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <h3 className={"text-xl font-bold"}>🏆 {rewardPoints}</h3>
-            <p className="mt-2">Add a reward (a chair, a service...)</p>
+            <p className="mt-2">Ajouter une récompense (une chaise, un service...)</p>
             <TextField
-              placeholder="Reward"
+              placeholder="Récompense"
               className="w-full px-3 py-2 border border-gray-300 rounded"
               onChange={(e) =>
                 setData({ ...data, otherReward: e.target.value })
@@ -325,7 +325,7 @@ const NewMission = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Close
+            Fermer
           </Button>
           <Button
             onClick={handlePublish}
@@ -333,7 +333,7 @@ const NewMission = () => {
             autoFocus
             disabled={loading}
           >
-            {loading ? "Publishing..." : "Publish Mission"}
+            {loading ? "Publication en cours..." : "Publier la mission"}
           </Button>
         </DialogActions>
       </Dialog>

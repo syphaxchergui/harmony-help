@@ -19,13 +19,13 @@ const AppBar = () => {
             className="h-16 object-contain"
             alt="harmony-help-logo"
           />
-          {connectedUser?.role === "user" ? <h1>Espace demandeur de service</h1> : <h1>Esapce Benevole</h1>}
+          {connectedUser?.role === "user" ? <h1>Espace demandeur de service</h1> : <h1>Espace Bénévole</h1>}
         </Link>
       </div>
       <div className="flex items-center justify-end gap-2">
         <Link to="/events">
           <p className="font-medium hover:bg-slate-300 px-6 py-2 rounded mr-2 hidden md:flex">
-            Events
+            Événements
           </p>
         </Link>
 
@@ -40,7 +40,7 @@ const AppBar = () => {
         {connectedUser?.role === "user" && (
           <Link to="/new-mission">
             <Button variant="contained" disableElevation>
-              New Mission
+              Nouvelle mission
             </Button>
           </Link>
         )}
@@ -59,7 +59,7 @@ const AppBar = () => {
         ) : (
           <Link to="/profile">
             <Button variant="outlined" disableElevation>
-              My profile
+              Mon profil
             </Button>
           </Link>
         )}

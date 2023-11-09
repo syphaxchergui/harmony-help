@@ -51,7 +51,7 @@ const Login = () => {
         />
         <TextField
           id="username"
-          label="Username"
+          label="Nom d'utilisateur"
           variant="outlined"
           size="small"
           value={login.username}
@@ -59,7 +59,7 @@ const Login = () => {
         />
         <TextField
           id="password"
-          label="Password"
+          label="Mot de passe"
           size="small"
           type="password"
           variant="outlined"
@@ -79,7 +79,7 @@ const Login = () => {
           variant="contained"
           color="primary"
         >
-          Login
+          Se connecter
         </Button>
       </div>
     </form>

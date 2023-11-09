@@ -15,7 +15,7 @@ const Profile = () => {
     {
       id: 1,
       name: "50% Chez Casino",
-      description: "50% off on your next purchase at Casino",
+      description: "50% de réduction sur votre prochain achat chez Casino",
       coupon: "CASINO50",
       points: 100,
     },
@@ -25,35 +25,35 @@ const Profile = () => {
     {
       id: 2,
       name: "50% Chez Lidl",
-      description: "50% off on your next purchase at Lidl",
+      description: "50% de réduction sur votre prochain achat chez Lidl",
       coupon: "LIDL50",
       points: 100,
     },
     {
       id: 3,
       name: "20% Chez carrefour",
-      description: "20% off on your next purchase at Carrefour",
+      description: "20% de réduction sur votre prochain achat chez Carrefour",
       coupon: "CARREFOUR20",
       points: 200,
     },
     {
       id: 4,
-      name: "Free coffee at Starbucks",
-      description: "Enjoy a free coffee at Starbucks",
+      name: "Café gratuit chez Starbucks",
+      description: "Profitez d'un café gratuit chez Starbucks",
       coupon: "FR33STRBCKS",
       points: 150,
     },
     {
       id: 5,
-      name: "Free movie ticket (Nice)",
-      description: "Enjoy a free movie ticket at Nice",
+      name: "Billet de cinéma gratuit (Nice)",
+      description: "Profitez d'un billet de cinéma gratuit à Nice",
       coupon: "NICEMOVIE",
       points: 250,
     },
     {
       id: 6,
-      name: "50% off on Amazon",
-      description: "50% off on your next purchase at Amazon",
+      name: "50% de réduction sur Amazon",
+      description: "50% de réduction sur votre prochain achat chez Amazon",
       coupon: "AMAZON50",
       points: 1000,
     },
@@ -99,28 +99,28 @@ const Profile = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-xl font-bold">Hey {connectedUser?.username}</p>
+        <p className="text-xl font-bold">Bonjour {connectedUser?.username}</p>
         <Button
           onClick={() => actions.logout()}
           variant="contained"
           color="primary"
           disableElevation
         >
-          Logout
+          Se déconnecter
         </Button>
       </div>
 
       {connectedUser?.role === "benevole" && (
         <>
           <div className="bg-white rounded-lg p-4 mb-6">
-            <h1 className="text-xl font-bold mb-4">My score</h1>
+            <h1 className="text-xl font-bold mb-4">Mon score</h1>
             <p className="text-2xl text-center text-bold w-full p-4 rounded-lg ring-blue-300 ring-1 bg-blue-50">
               {score} points
             </p>
           </div>
 
           <div className="bg-white rounded-lg p-4 mb-6">
-            <h1 className="text-xl font-bold mb-4">My rewards</h1>
+            <h1 className="text-xl font-bold mb-4">Mes récompenses</h1>
             {myRewards.map((reward, index) => (
               <div
                 key={index}
@@ -132,14 +132,14 @@ const Profile = () => {
                   color="primary"
                   onClick={() => handleRewardDetails(reward)}
                 >
-                  Details
+                  Détails
                 </Button>
               </div>
             ))}
           </div>
 
           <div className="bg-white rounded-lg p-4">
-            <h1 className="text-xl font-bold mb-4">Available Rewards</h1>
+            <h1 className="text-xl font-bold mb-4">Récompenses disponibles</h1>
             {rewards.map((reward, index) => (
               <div
                 key={index}
@@ -154,7 +154,7 @@ const Profile = () => {
                   disabled={score < reward.points}
                   onClick={() => handleClaimReward(reward)}
                 >
-                  {`Claim ${reward.points} pts`}
+                  {`Obtenir ${reward.points} pts`}
                 </Button>
               </div>
             ))}
@@ -185,7 +185,7 @@ const Profile = () => {
           </Typography>
           <Typography id="modal-description" sx={{ mt: 2 }}>
             {selectedReward?.description}
-            {`. \nThis reward costs ${selectedReward?.points} points. Are you sure you want to claim it?`}
+            {`. \nCette récompense coûte ${selectedReward?.points} points. Êtes-vous sûr de vouloir l'obtenir ?`}
           </Typography>
           <Button
             variant="outlined"
@@ -193,7 +193,7 @@ const Profile = () => {
             onClick={() => setOpenModal(false)}
             sx={{ mt: 2, mr: 1 }}
           >
-            Cancel
+            Annuler
           </Button>
           <Button
             autoFocus
@@ -203,7 +203,7 @@ const Profile = () => {
             onClick={handleConfirmClaim}
             sx={{ mt: 2 }}
           >
-            Confirm
+            Confirmer
           </Button>
         </Box>
       </Modal>
@@ -242,7 +242,7 @@ const Profile = () => {
             onClick={handleCloseRewardDetails}
             sx={{ mt: 2 }}
           >
-            Close
+            Fermer
           </Button>
         </Box>
       </Modal>

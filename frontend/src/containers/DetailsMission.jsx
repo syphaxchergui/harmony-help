@@ -31,7 +31,7 @@ const DetailsMission = () => {
       ...missions.filter((mission) => mission.id !== newMission.id),
       newMission,
     ]);
-    notify.success("Offer sent successfully");
+    notify.success("Offre envoyée avec succès");
     navigate("/");
   };
 
@@ -40,7 +40,7 @@ const DetailsMission = () => {
       <div className="p-4 bg-white rounded-md">
         <h3 className="font-medium text-2xl">{mission.title}</h3>
         <p className="text-sm text-gray-500  mb-4">
-          {mission.startDate} by {mission?.author?.username}
+          {mission.startDate} par {mission?.author?.username}
         </p>
         <p className="mr-2">Description:</p>
         <p className="text-md font-mono mb-2">
@@ -48,7 +48,7 @@ const DetailsMission = () => {
         </p>
         <div className="flex flex-col items-start mt-6 gap-2 ">
           <div className="flex items-center">
-            <p className="mr-2">Difficulty:</p>
+            <p className="mr-2">Difficulté:</p>
             <div
               className={`rounded-full font-medium px-3 py-1 ${
                 mission.difficulty === "easy"
@@ -62,26 +62,26 @@ const DetailsMission = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <p className="mr-2">Competency required:</p>
+            <p className="mr-2">Compétence requise:</p>
             <div className="rounded-full bg-green-100 text-green-400 font-medium px-3 py-1">
               {mission?.competency?.name}
             </div>
           </div>
           <div className="flex items-center">
-            <p className="mr-2">Duration:</p>
+            <p className="mr-2">Durée:</p>
             <div className="rounded-full bg-blue-50 text-blue-300 font-medium px-3 py-1">
-              🕐 {mission.duration} Hours
+              🕐 {mission.duration} Heures
             </div>
           </div>
           <div className="flex items-center">
-            <p className="mr-2">Reward:</p>
+            <p className="mr-2">Récompense:</p>
             <div className="rounded-full bg-amber-50 text-amber-300 font-medium px-3 py-1">
               🏆 {mission.reward}
             </div>
           </div>
           {mission?.otherReward && (
             <div className="flex items-center">
-              <p className="mr-2">Other rewards:</p>
+              <p className="mr-2">Autres récompenses:</p>
               <div className=" font-medium px-3 py-1">
                 {mission?.otherReward}
               </div>
@@ -98,19 +98,19 @@ const DetailsMission = () => {
               variant="contained"
               onClick={handleSendOffer}
             >
-              Send Offer
+              Envoyer une offre
             </Button>
           </div>
         ) : connectedUser?.role === "benevole" ? (
           <div className="mt-6 font-medium px-4 py-2 rounded text-center bg-blue-50">
-            Offer already sent !
+            Offre déjà envoyée !
           </div>
         ) : null}
       </div>
 
       {connectedUser?.role === "user" && (
         <div className="p-4 bg-white rounded-md mt-4">
-          <p className="text-xl mb-6 font-bold">Benevole offers</p>
+          <p className="text-xl mb-6 font-bold">Offres de bénévoles</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {mission?.offers?.length > 0 ? (
               mission?.offers?.map((offer) => {
@@ -121,21 +121,21 @@ const DetailsMission = () => {
                   >
                     <div className="flex flex-col justify-center items-start px-4 pt-1 w-full">
                       <span className="flex gap-1">
-                        <p className="font-medium ">Benevole:</p>{" "}
+                        <p className="font-medium ">Bénévole:</p>{" "}
                         <p>{offer.user.username} - {offer.user.note}⭐</p>
                       </span>
                       <span className="flex gap-1">
-                        <p className="font-medium">Status:</p>
+                        <p className="font-medium">Statut:</p>
                         <p>{offer.status}</p>
                       </span>
                     </div>
 
-                    <Button>Accept</Button>
+                    <Button>Accepter</Button>
                   </div>
                 );
               })
             ) : (
-              <p>No offers yet</p>
+              <p>Aucune offre pour le moment</p>
             )}
           </div>
         </div>

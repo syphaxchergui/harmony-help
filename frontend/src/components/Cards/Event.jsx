@@ -18,12 +18,12 @@ const Event = ({ id, title, createdAt, author, address }) => {
           <h3 className="font-medium text-xl flex-wrap">{title}</h3>
         </div>
         <p className="text-sm text-gray-500 mb-2">
-          {createdAt} by {author}
+          {createdAt} par {author}
         </p>
         <p className="mb-2 font-medium">📍 {address}</p>
       </div>
       <Button sx={{ mx: 2, mb: 2 }} variant="contained" disableElevation>
-        Join
+        Rejoindre
       </Button>
     </div>
   );

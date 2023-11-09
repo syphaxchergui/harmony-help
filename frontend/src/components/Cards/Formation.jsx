@@ -18,17 +18,17 @@ const Formation = ({ id, title, createdAt, author, description }) => {
           <h3 className="font-medium text-xl flex-wrap">{title}</h3>
         </div>
         <p className="text-sm text-gray-500 mb-2">
-          {createdAt} by {author}
+          {createdAt} par {author}
         </p>
         <p className="mb-2 font-medium">{description}</p>
       </div>
 
       <div className="flex items-center justify-between">
         <Button sx={{ mx: 2, mb: 2 }} variant="outlined" disableElevation>
-          Offer to teach
+          Proposer d'enseigner
         </Button>
         <Button sx={{ mx: 2, mb: 2 }} variant="contained" disableElevation>
-          Enroll
+          S'inscrire
         </Button>
       </div>
     </div>

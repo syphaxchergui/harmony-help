@@ -27,11 +27,11 @@ const Mission = ({
           <div className="flex justify-between">
             <h3 className="font-medium text-xl flex-wrap">{title}</h3>
             {connectedUser.role === 'user' && <p className="text-sm text-gray-500 mb-2">
-              {offers} {offers === 1 ? 'offer' : 'offers'}
+              {offers} {offers === 1 ? 'offre' : 'offres'}
             </p>}
           </div>
           <p className="text-sm text-gray-500 mb-2">
-            {createdAt} by {author}
+            {createdAt} par {author}
           </p>
           <p className="mb-2 font-medium">
               📍 {adresse}

@@ -21,7 +21,7 @@ const AllMissions = () => {
             createdAt={mission?.startDate}
             author={
               mission?.author?.username === connectedUser?.username
-                ? "You"
+                ? "toi"
                 : mission?.author?.username
             }
             difficulty={mission?.difficulty}
