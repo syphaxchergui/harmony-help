@@ -14,8 +14,8 @@ const Profile = () => {
   const [myRewards, setMyRewards] = useState([
     {
       id: 1,
-      name: "50% Chez Casino",
-      description: "50% de réduction sur votre prochain achat chez Casino",
+      name: "5% Chez Casino",
+      description: "5% de réduction sur votre prochain achat chez Casino",
       coupon: "CASINO50",
       points: 100,
     },
@@ -24,37 +24,42 @@ const Profile = () => {
   const [rewards, setRewards] = useState([
     {
       id: 2,
-      name: "50% Chez Lidl",
-      description: "50% de réduction sur votre prochain achat chez Lidl",
-      coupon: "LIDL50",
+      name: "Repas gastronomique chez Le Petit Bistro (30% de réduction)",
+      description:
+        "Savourez un repas gastronomique avec 30% de réduction chez Le Petit Bistro",
+      coupon: "BISTRO30",
       points: 100,
     },
     {
       id: 3,
-      name: "20% Chez carrefour",
-      description: "20% de réduction sur votre prochain achat chez Carrefour",
-      coupon: "CARREFOUR20",
+      name: "Shopping de qualité chez Le Grand Magasin (10% de réduction)",
+      description:
+        "Profitez de 10% de réduction sur des produits de qualité chez Le Grand Magasin",
+      coupon: "GRAND10",
       points: 200,
     },
     {
       id: 4,
-      name: "Café gratuit chez Starbucks",
-      description: "Profitez d'un café gratuit chez Starbucks",
-      coupon: "FR33STRBCKS",
-      points: 150,
-    },
-    {
-      id: 5,
-      name: "Billet de cinéma gratuit (Nice)",
-      description: "Profitez d'un billet de cinéma gratuit à Nice",
-      coupon: "NICEMOVIE",
+      name: "Pause café gourmande chez Pâtisserie Delice",
+      description:
+        "Offrez-vous une pause café gourmande avec un café gratuit chez Pâtisserie Delice",
+      coupon: "DELIKCAFÉ",
       points: 250,
     },
     {
+      id: 5,
+      name: "Expérience cinéma VIP à Nice",
+      description:
+        "Vivez une expérience cinéma VIP avec un billet gratuit à Nice",
+      coupon: "NICEVIP",
+      points: 500,
+    },
+    {
       id: 6,
-      name: "50% de réduction sur Amazon",
-      description: "50% de réduction sur votre prochain achat chez Amazon",
-      coupon: "AMAZON50",
+      name: "Shopping varié sur Amazon",
+      description:
+        "Faites votre shopping avec une réduction exceptionnelle de 25% sur Amazon",
+      coupon: "AMAZON25",
       points: 1000,
     },
   ]);
@@ -75,7 +80,8 @@ const Profile = () => {
     });
     setMyRewards([...myRewards, selectedReward]);
     setRewards(rewards.filter((reward) => reward.name !== selectedReward.name));
-    setSelectedReward(null);
+    setSelectedRewardDetails(selectedReward);
+    setOpenRewardDetails(true);
     setConfetti(true);
     setTimeout(() => {
       setConfetti(false);
@@ -143,7 +149,9 @@ const Profile = () => {
             {rewards.map((reward, index) => (
               <div
                 key={index}
-                className={`flex w-full p-4 bg-blue-100 ${score < reward.points && 'bg-blue-50 text-gray-500'} my-2 rounded-lg items-center justify-between reward-item`}
+                className={`flex w-full p-4 bg-blue-100 ${
+                  score < reward.points && "bg-blue-50 text-gray-500"
+                } my-2 rounded-lg items-center justify-between reward-item`}
               >
                 <p className="text-lg font-medium">
                   {reward.name} {score < reward.points && "🔐"}
@@ -161,6 +169,7 @@ const Profile = () => {
           </div>
         </>
       )}
+      {confetti && <Confetti />}
 
       <Modal
         open={openModal}
@@ -227,13 +236,23 @@ const Profile = () => {
             outline: "none",
           }}
         >
-          <Typography id="modal-title" variant="h6" component="h2" sx={{ }}>
+          <Typography id="modal-title" variant="h6" component="h2" sx={{}}>
             {selectedRewardDetails?.name}
           </Typography>
           <Typography id="modal-description" sx={{ mb: 2 }}>
             {selectedRewardDetails?.description}
           </Typography>
-          <Typography id="modal-coupon" sx={{ bgcolor: '#f0f0f0', px: 2, py: 1, borderRadius: 2, textAlign: 'center', fontSize: 24}}>
+          <Typography
+            id="modal-coupon"
+            sx={{
+              bgcolor: "#f0f0f0",
+              px: 2,
+              py: 1,
+              borderRadius: 2,
+              textAlign: "center",
+              fontSize: 24,
+            }}
+          >
             <strong>{selectedRewardDetails?.coupon}</strong>
           </Typography>
           <Button
@@ -246,8 +265,6 @@ const Profile = () => {
           </Button>
         </Box>
       </Modal>
-
-      {confetti && <Confetti />}
     </div>
   );
 };

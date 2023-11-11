@@ -5,45 +5,46 @@ const AllCourses = () => {
     const courses = [
         {
             id: 1,
-            title: "Introduction to Painting",
-            createdAt: "2022-01-01T12:00:00Z",
-            author: "John Doe",
+            title: "Introduction à la peinture",
+            createdAt: "15 janvier 2024 à 12h00",
+            author: "Jean Dupont",
             description:
-                "Learn the basics of painting and create your first masterpiece.",
+                "Apprenez les bases de la peinture et créez votre première œuvre d'art.",
         },
         {
             id: 2,
-            title: "Plumbing 101",
-            createdAt: "2022-02-14T09:00:00Z",
-            author: "Jane Smith",
+            title: "Plomberie 101",
+            createdAt: "22 février 2024 à 09h00",
+            author: "Marie Martin",
             description:
-                "Get started with plumbing and learn how to fix common household issues.",
+                "Initiez-vous à la plomberie et apprenez à réparer les problèmes courants dans la maison.",
         },
         {
             id: 3,
-            title: "Advanced Carpentry",
-            createdAt: "2022-03-20T10:00:00Z",
-            author: "Bob Johnson",
+            title: "Menuiserie Avancée",
+            createdAt: "10 mars 2024 à 10h00",
+            author: "Robert Tremblay",
             description:
-                "Take your carpentry skills to the next level with advanced techniques.",
+                "Portez vos compétences en menuiserie au niveau supérieur avec des techniques avancées.",
         },
         {
             id: 4,
-            title: "Introduction to Photography",
-            createdAt: "2022-04-15T14:00:00Z",
-            author: "Sarah Lee",
+            title: "Introduction à la photographie",
+            createdAt: "18 avril 2024 à 14h00",
+            author: "Sylvie Lefebvre",
             description:
-                "Learn the basics of photography and capture stunning images.",
+                "Apprenez les bases de la photographie et capturez des images éblouissantes.",
         },
         {
             id: 5,
-            title: "Web Development Bootcamp",
-            createdAt: "2022-05-10T08:00:00Z",
-            author: "Mike Johnson",
+            title: "Bootcamp de Développement Web",
+            createdAt: "25 mai 2024 à 08h00",
+            author: "Michel Gagnon",
             description:
-                "Become a full-stack web developer with this comprehensive bootcamp.",
+                "Devenez un développeur web full-stack avec ce bootcamp complet.",
         },
     ];
+    
 
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">

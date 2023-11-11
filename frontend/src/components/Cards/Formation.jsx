@@ -3,9 +3,11 @@ import logo from "../../assets/logo-text.png";
 import { Link } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 import { Button } from "@mui/material";
+import { useNotifications } from "../../context/NotificationContext";
 
 const Formation = ({ id, title, createdAt, author, description }) => {
   const [connectedUser] = useToken("_connectedUser");
+  const { actions: notify } = useNotifications();
 
   return (
     <div className="bg-white rounded-xl flex flex-col items-stretch hover:bg-slate-50 hover:shadow-md ring-1 ring-blue-200">
@@ -24,10 +26,10 @@ const Formation = ({ id, title, createdAt, author, description }) => {
       </div>
 
       <div className="flex items-center justify-between">
-        <Button sx={{ mx: 2, mb: 2 }} variant="outlined" disableElevation>
+        <Button sx={{ mx: 2, mb: 2 }} variant="outlined" disableElevation onClick={() => notify.info(`Votre proposition pour enseigner ${title} est envoyée.`)}>
           Proposer d'enseigner
         </Button>
-        <Button sx={{ mx: 2, mb: 2 }} variant="contained" disableElevation>
+        <Button sx={{ mx: 2, mb: 2 }} variant="contained" disableElevation onClick={() => notify.info(`Votre inscription pour suivre ${title} est prise en compte !`)}>
           S'inscrire
         </Button>
       </div>

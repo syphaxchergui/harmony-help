@@ -3,13 +3,13 @@ export const rewardsService = {
       // Calculate the reward points based on the difficulty, duration, and competency
       let rewardPoints = 0;
       switch (difficulty) {
-        case 'easy':
+        case 'Facile':
           rewardPoints+= 100;
           break;
-        case 'medium':
+        case 'Moyen':
           rewardPoints += 200;
           break;
-        case 'hard':
+        case 'Difficile':
           rewardPoints += 300;
           break;
         default:
@@ -21,8 +21,7 @@ export const rewardsService = {
       rewardPoints += competency * 3;
 
       return rewardPoints;  
-   
-   
+  
     },
     // getRewards: () => {
     //   return rewards;

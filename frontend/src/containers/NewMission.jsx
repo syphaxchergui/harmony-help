@@ -27,38 +27,59 @@ const initialData = {
 
 const competencies = [
   {
-    id: 0,
-    value: 10,
-    name: "Compétence 01",
+      id: 0,
+      value: 10,
+      name: "Oil Painting",
   },
   {
-    id: 1,
-    value: 15,
-    name: "Compétence 02",
+      id: 1,
+      value: 15,
+      name: "Residential Plumbing",
   },
   {
-    id: 2,
-    value: 23,
-    name: "Compétence 03",
+      id: 2,
+      value: 23,
+      name: "Artisanal Carpentry",
   },
   {
-    id: 3,
-    value: 29,
-    name: "Compétence 04",
+      id: 3,
+      value: 29,
+      name: "Creative Photography",
+  },
+  {
+      id: 4,
+      value: 18,
+      name: "Gourmet Cooking",
+  },
+  {
+      id: 5,
+      value: 25,
+      name: "Advanced Programming",
+  },
+  {
+      id: 6,
+      value: 12,
+      name: "Organic Gardening",
+  },
+  {
+      id: 7,
+      value: 20,
+      name: "Foreign Language - Spanish",
   },
 ];
 
+
 const difficulties = [
   {
-    value: "easy",
+    value: "Facile",
     name: "Facile",
   },
   {
-    value: "medium",
+    value: "Moyen",
     name: "Moyen",
   },
   {
-    value: "hard",
+    value: "Difficile",
     name: "Difficile",
   },
 ];

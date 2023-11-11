@@ -3,9 +3,18 @@ import logo from "../../assets/logo-text.png";
 import { Link } from "react-router-dom";
 import useToken from "../../hooks/useToken";
 import { Button } from "@mui/material";
+import { useNotifications } from "../../context/NotificationContext";
 
-const Event = ({ id, title, createdAt, author, address }) => {
+const Event = ({
+  id,
+  title,
+  createdAt,
+  author,
+  address,
+  nbrOfParticipants = 0,
+}) => {
   const [connectedUser] = useToken("_connectedUser");
+  const { actions: notify } = useNotifications();
 
   return (
     <div className="bg-white rounded-xl flex flex-col items-stretch hover:bg-slate-50 hover:shadow-md ring-1 ring-blue-200">
@@ -20,9 +29,20 @@ const Event = ({ id, title, createdAt, author, address }) => {
         <p className="text-sm text-gray-500 mb-2">
           {createdAt} par {author}
         </p>
+
         <p className="mb-2 font-medium">📍 {address}</p>
+        <p className="text-sm text-gray-500 mb-2">
+          {nbrOfParticipants} participants.
+        </p>
       </div>
-      <Button sx={{ mx: 2, mb: 2 }} variant="contained" disableElevation>
+      <Button
+        sx={{ mx: 2, mb: 2 }}
+        variant="contained"
+        disableElevation
+        onClick={() =>
+          notify.info(`Rendez vous le ${createdAt}, a ${address} !`)
+        }
+      >
         Rejoindre
       </Button>
     </div>
