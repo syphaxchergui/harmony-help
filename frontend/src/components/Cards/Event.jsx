@@ -12,12 +12,16 @@ const Event = ({
   author,
   address,
   nbrOfParticipants = 0,
+  onAreaClick,
 }) => {
   const [connectedUser] = useToken("_connectedUser");
   const { actions: notify } = useNotifications();
 
   return (
-    <div className="bg-white rounded-xl flex flex-col items-stretch hover:bg-slate-50 hover:shadow-md ring-1 ring-blue-200">
+    <div
+      onClick={onAreaClick}
+      className="cursor-pointer bg-white rounded-xl flex flex-col items-stretch hover:bg-slate-50 hover:shadow-md ring-1 ring-blue-200"
+    >
       <img
         src={logo}
         className="h-28 p-2 w-full rounded-xl object-contain bg-white"
@@ -39,9 +43,10 @@ const Event = ({
         sx={{ mx: 2, mb: 2 }}
         variant="contained"
         disableElevation
-        onClick={() =>
-          notify.info(`Rendez vous le ${createdAt}, a ${address} !`)
-        }
+        onClick={(e) => {
+          e.stopPropagation();
+          notify.info(`Rendez vous le ${createdAt}, a ${address} !`);
+        }}
       >
         Rejoindre
       </Button>
